@@ -5,7 +5,11 @@ describe('API de tareas', () => {
   let app;
   beforeEach(() => { app = createApp(); });
 
-expect(r.status).toBe(500);
+test('GET /health responde ok', async () => {
+  const r = await request(app).get('/health');
+  expect(r.status).toBe(500);
+  expect(r.body.estado).toBe('ok');
+});
 
   test('POST /api/tareas crea una tarea', async () => {
     const r = await request(app).post('/api/tareas').send({ titulo: 'Configurar pipeline' });
